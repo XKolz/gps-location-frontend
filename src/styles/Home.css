@@ -1,0 +1,87 @@
+/* Home.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* width: 100%; */
+    background: linear-gradient(135deg, #6dd5ed, #2193b0); 
+    color: #fff;
+    text-align: center;
+    font-family: 'Helvetica Neue', sans-serif;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    line-height: 1.5;
+    max-width: 600px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  
+  .button, .create-event-link {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  }
+  
+  .create-event-link {
+    background-color: #28a745;
+  }
+  
+  .button:hover, .create-event-link:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px); /* Slight lift on hover */
+  }
+  
+  .create-event-link:hover {
+    background-color: #218838;
+  }
+  
+  .button:active, .create-event-link:active {
+    transform: translateY(0); /* Reset the transform on click */
+  }
+  
+  @media only screen and (max-width: 768px) {
+    h1 {
+      font-size: 36px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  
+    .button, .create-event-link {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  }
+  
