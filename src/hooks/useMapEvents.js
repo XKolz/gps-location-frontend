@@ -11,6 +11,7 @@ export const useMapEvents = () => {
   
   const setEvents = useStore((state) => state.setEvents); // Use Zustand action to set events
   const events = useStore((state) => state.events); // Access events from Zustand
+  console.log('events:', events);
 
   const fetchEvents = useCallback(async (latitude, longitude, eventType, sortBy) => {
     setLoading(true);

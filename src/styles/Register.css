@@ -1,4 +1,9 @@
 /* Register.css */
+.register-logo {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  margin-bottom: 20px; /* Add spacing between logo and form */
+}
 .register-container {
     max-width: 400px;
     margin: 50px auto;
@@ -42,5 +47,26 @@
   
   button:hover {
     background-color: #0056b3;
+  }
+
+
+
+  .password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input {
+    width: 100%;
+    padding-right: 40px; /* Add padding to make room for the eye icon */
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #333; /* You can adjust the color of the eye icon */
+    font-size: 1.5rem; /* Adjust icon size as needed */
   }
   

@@ -1,4 +1,11 @@
 /* Login.css */
+.login-logo {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  margin-bottom: 20px; /* Add spacing between logo and form */
+}
+
+/*  */
 .login-container {
     max-width: 400px;
     margin: 50px auto;
@@ -48,5 +55,25 @@
     color: red;
     font-size: 14px;
     margin-bottom: 0;
+  }
+
+
+  .password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input {
+    width: 100%;
+    padding-right: 40px; /* Add padding to accommodate the eye icon */
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #333; /* You can adjust the color of the eye icon */
+    font-size: 1.5rem; /* Adjust the icon size as needed */
   }
   
