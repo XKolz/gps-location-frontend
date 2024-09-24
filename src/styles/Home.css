@@ -13,7 +13,9 @@ body, html {
     justify-content: center;
     height: 100vh;
     /* width: 100%; */
-    background: linear-gradient(135deg, #6dd5ed, #2193b0); 
+    /* background: linear-gradient(135deg, #6dd5ed, #2193b0);  */
+    /* background: linear-gradient(135deg, #2a6a82, #0d3b57); */
+    background: linear-gradient(135deg, #1c4d63, #0a2733);
     color: #fff;
     text-align: center;
     font-family: 'Helvetica Neue', sans-serif;
