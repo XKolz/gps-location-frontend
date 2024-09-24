@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    padding-top: 10px;
   }
   
   .filters label {
@@ -28,3 +29,90 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+/* Custom Popup Container */
+.custom-popup {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #333; /* Text color */
+  font-family: 'Arial', sans-serif; /* Custom font */
+  padding: 5px;
+}
+
+/* Customize the heading inside the popup */
+.custom-popup h3 {
+  font-size: 1.2rem; 
+  margin-bottom: 8px;
+  color: #3498db; 
+}
+
+/* Customize the paragraph text inside the popup */
+.custom-popup p {
+  margin: 4px 0; /* Adjust margins between paragraphs */
+  font-size: 0.9rem; /* Slightly smaller font for paragraphs */
+  line-height: 1.4; /* Line height for better readability */
+  text-align: start;
+}
+
+/* Customize the Link inside the popup */
+.custom-popup a {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #3498db; /* Link color */
+  text-decoration: none;
+}
+
+.custom-popup a:hover {
+  text-decoration: underline;
+}
+
+/* Customize the button inside the popup */
+.custom-popup button {
+  background-color: #3498db; /* Button background color */
+  color: white; /* Button text color */
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.custom-popup button:hover {
+  background-color: #2980b9; /* Darker on hover */
+}
+
+/*  */
+.leaflet-container .leaflet-popup-close-button {
+  color: red !important; 
+  font-size: 18px !important; 
+  font-weight: bold !important;
+}
+
+.leaflet-container .leaflet-popup-close-button:hover {
+  color: darkred !important; /* Force hover effect */
+}
+
+  .back-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    width: 40px; /* Adjust size as needed */
+    height: 40px; 
+    border-radius: 50%; /* This makes it a circle */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+  }
+  
+  .back-arrow:hover {
+    background-color: #3498db; /* Change the background on hover */
+    color: #fff; /* Change the arrow color on hover */
+  }
+  

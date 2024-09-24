@@ -18,7 +18,7 @@ function Home() {
   return (
     <div className="container">
       <h1>Welcome to the Event Finder App</h1>
-      <p>Find events and services near your location in real-time!</p>
+      <span style={{ fontSize: '20px', color: '#dde7f0', fontWeight: 'bold' }}>Find events and services near your location in real-time!</span>
 
       <div className='button-container'>
         {!token ? (

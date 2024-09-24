@@ -3,8 +3,12 @@ import { useParams } from 'react-router-dom';
 import { useEventDetail } from '../hooks/useEventDetail';
 import '../styles/EventDetail.css';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 function EventDetail() {
+  const navigate = useNavigate();
   const { id } = useParams();  // Get event ID from URL
   const {
     event,
@@ -27,6 +31,11 @@ function EventDetail() {
   if (!event) return <p>Event not found</p>;
 
   return (
+    <>
+      {/* Back arrow link */}
+      <Link className="back-arrow" onClick={() => navigate(-1)}>
+        <FaArrowLeft size={24} /> {/* You can change the size if necessary */}
+      </Link>
     <div className="event-detail-container">
       <h2>{event.name}</h2>
       <p>{event.description}</p>
@@ -69,6 +78,7 @@ function EventDetail() {
       </div>
       <button onClick={submitReview}>Submit Review</button>
     </div>
+    </>
   );
 }
 

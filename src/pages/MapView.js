@@ -8,6 +8,7 @@ import { useMapEvents } from '../hooks/useMapEvents'; // Custom hook
 import { toast } from 'react-toastify';
 import { bookmarkEvent } from '../api/events'; // Bookmark API
 import ClipLoader from 'react-spinners/ClipLoader';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const customIcon = new L.Icon({
   iconUrl: require('../assets/custom_marker.png'),
@@ -58,9 +59,13 @@ if (loading) {
 
   return (
     <div>
+        {/* Back arrow link */}
+        <Link to="/" className="back-arrow">
+          <FaArrowLeft size={24} /> {/* You can change the size if necessary */}
+        </Link>
       <div className="filters">
         <label htmlFor="eventType">Filter by Event Type: </label>
-        <select id="eventType" value={eventType} onChange={(e) => setEventType(e.target.value)}>
+        <select style={{ width: '200px' }} id="eventType" value={eventType} onChange={(e) => setEventType(e.target.value)}>
           <option value="">All</option>
           <option value="restaurant">Restaurant</option>
           <option value="concert">Concert</option>
@@ -68,7 +73,7 @@ if (loading) {
         </select>
 
         <label htmlFor="sortBy">Sort by: </label>
-        <select id="sortBy" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <select style={{ width: '200px' }} id="sortBy" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value="">None</option>
           <option value="distance">Distance</option>
           <option value="date">Date</option>
@@ -84,7 +89,7 @@ if (loading) {
               position={[event.location.coordinates[1], event.location.coordinates[0]]}
               icon={customIcon}
             >
-              <Popup>
+              <Popup className="custom-popup">
                 <h3>{event.name}</h3>
                 <p>{event.description}</p>
                 <p><strong>Type:</strong> {event.type}</p>
