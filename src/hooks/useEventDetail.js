@@ -36,8 +36,7 @@ export const useEventDetail = (id) => {
   const submitReview = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-    //   alert('You need to log in to leave a review.');
-    toast.warn('You need to log in to leave a review.');
+      toast.warn('You need to log in to leave a review.');
       return;
     }
 
@@ -48,9 +47,14 @@ export const useEventDetail = (id) => {
     };
 
     try {
-      await submitEventReview(reviewData, token);
-    //   alert('Review submitted successfully!');
-    toast.success('Review submitted successfully!');
+      const submittedReview = await submitEventReview(reviewData, token);
+
+      toast.success('Review submitted successfully!');
+      
+      // Update the review list with the new review
+      setReviews((prevReviews) => [...prevReviews, submittedReview]);
+
+      // Clear the form fields
       setNewReview('');
       setNewRating(0);
     } catch (error) {

@@ -92,3 +92,42 @@
     100% { transform: rotate(360deg); }
   }
   
+  .review-list {
+    max-height: 500px; /* Default maximum height */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  .review-list.scrollable {
+    max-height: 200px; /* Limit the height of the scrollable area */
+    overflow-y: scroll; /* Always show scrollbar when scrollable */
+  }
+  
+  .review-list ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .review-list li {
+    list-style-type: none;
+    margin-bottom: 15px;
+  }
+  
+  /* Style the scrollbar (optional for custom styling) */
+  .review-list.scrollable::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .review-list.scrollable::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Scrollbar track color */
+  }
+  
+  .review-list.scrollable::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar thumb color */
+    border-radius: 10px;
+  }
+  
+  .review-list.scrollable::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Scrollbar thumb hover color */
+  }
+  
