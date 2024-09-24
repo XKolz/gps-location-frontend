@@ -18,7 +18,6 @@ export const useAuth = () => {
       navigate('/map');
     } catch (err) {
       console.error('Error logging in:', err);
-    //   setError('Invalid email or password. Please try again.');
       toast.error('Login failed. Please check your credentials.');
     }
   };

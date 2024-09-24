@@ -7,6 +7,7 @@ import "../styles/mapview.css";
 import { useMapEvents } from '../hooks/useMapEvents'; // Custom hook
 import { toast } from 'react-toastify';
 import { bookmarkEvent } from '../api/events'; // Bookmark API
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const customIcon = new L.Icon({
   iconUrl: require('../assets/custom_marker.png'),
@@ -45,7 +46,14 @@ function MapView() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+if (loading) {
+  return (
+    <div className="spinner">
+      <ClipLoader color="#3498db" size={50} />
+    </div>
+  );
+}
+
   if (error) return <p>{error}</p>;
 
   return (

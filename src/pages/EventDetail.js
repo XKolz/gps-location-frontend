@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEventDetail } from '../hooks/useEventDetail';
 import '../styles/EventDetail.css';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 function EventDetail() {
   const { id } = useParams();  // Get event ID from URL
@@ -16,7 +17,13 @@ function EventDetail() {
     loading,
   } = useEventDetail(id);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="spinner">
+        <ClipLoader color="#3498db" size={50} />
+      </div>
+    );
+  }
   if (!event) return <p>Event not found</p>;
 
   return (
