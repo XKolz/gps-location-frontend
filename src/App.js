@@ -6,23 +6,35 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import EventDetail from './pages/EventDetail'; // Import EventDetail component
 import PrivateRoute from './middleware/PrivateRoute'; 
+import PublicRoute from './middleware/PublicRoute';
 import EventCreation from './pages/EventCreation'; // Import PrivateRoute component
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      {/* <Route
-        path="/map"
+        {/* Wrap Login and Register with PublicRoute */}
+      <Route
+        path="/login"
         element={
-          <PrivateRoute>
-            <MapView />
-          </PrivateRoute>
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
         }
-      /> */}
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
       <Route path='/map' element={<MapView />} />
+       {/* Wrap protected routes with PrivateRoute */}
       <Route
         path="/create-event"
         element={
@@ -39,10 +51,10 @@ function App() {
           </PrivateRoute>
         } 
       />
-      {/* <Route path="/events/:id" element={<EventDetail />} />  */}
       {/* Add this route */}
-
     </Routes>
+    <ToastContainer />
+    </>
   );
 }
 

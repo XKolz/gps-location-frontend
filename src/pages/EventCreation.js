@@ -1,106 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useEventCreation } from '../hooks/useEventCreation'; // Custom hook
 import '../styles/EventCreation.css';
 
 function EventCreation() {
-  const [name, setName] = useState('');
-  const [type, setType] = useState('');
-  const [address, setAddress] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
-  const [description, setDescription] = useState('');
-  const [dateTime, setDateTime] = useState('');
-  const [message, setMessage] = useState('');
-  const [loadingLocation, setLoadingLocation] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Use Geolocation API to automatically fill latitude and longitude
-    if (navigator.geolocation) {
-      setLoadingLocation(true);
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
-          setLoadingLocation(false);
-        },
-        (error) => {
-          console.error('Error fetching location:', error);
-          setMessage('Unable to get your location. Please fill in the coordinates manually.');
-          setLoadingLocation(false);
-        }
-      );
-    }
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // const token = localStorage.getItem('token');
-    const token = localStorage.getItem('token');
-// console.log('Token:', token);
-
-    if (!token) {
-      setMessage('You need to log in to create an event.');
-      return;
-    }
-
-    // try {
-    //   const response = await axios.post(
-    //     'http://localhost:5000/api/events', // Ensure this route is correct in your backend
-    //     {
-    //       name,
-    //       type,
-    //       address,
-    //       latitude: parseFloat(latitude), // Convert to float
-    //       longitude: parseFloat(longitude), // Convert to float
-    //       description,
-    //       date_time: dateTime,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     }
-    //   );
-
-    //   setMessage('Event created successfully!');
-    //   navigate('/map');
-    // } catch (error) {
-    //   console.error('Error creating event:', error);
-    //   setMessage('Failed to create the event. Please try again.');
-    // }
-
-    try {
-        const response = await axios.post(
-          'http://localhost:5000/api/events',
-          {
-            name,
-            type,
-            address,
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude),
-            description,
-            date_time: dateTime,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      
-        // You can now use response data if needed
-        console.log('Event created:', response.data); // Logs event creation success details
-        setMessage('Event created successfully!');
-        navigate('/map');
-      } catch (error) {
-        console.error('Error creating event:', error);
-        setMessage('Failed to create the event. Please try again.');
-      }
-      
-  };
+  const {
+    name, setName, type, setType, address, setAddress,
+    latitude, setLatitude, longitude, setLongitude,
+    description, setDescription, dateTime, setDateTime,
+    message, loadingLocation, handleSubmit
+  } = useEventCreation(); // Use custom hook for event creation logic
 
   return (
     <div className='event-creation-container'>
@@ -119,7 +27,6 @@ function EventCreation() {
           <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
         </div>
 
-        {/* Latitude and Longitude fields, auto-filled if location is available */}
         <div>
           <label>Latitude:</label>
           <input type="number" step="any" value={latitude} onChange={(e) => setLatitude(e.target.value)} required />

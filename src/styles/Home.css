@@ -41,6 +41,23 @@ body, html {
     margin-top: 20px;
     justify-content: center;
   }
+
+.button-logout{
+  background-color: rgb(182, 38, 38);
+  color: white;
+  padding: 12px 30px;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  }
+
+  .button-logout:hover {
+    background-color: red;
+    transform: translateY(-5px); /* Slight lift on hover */
+  }
   
   .button, .create-event-link {
     padding: 12px 30px;
@@ -65,6 +82,8 @@ body, html {
   .create-event-link:hover {
     background-color: #218838;
   }
+
+  
   
   .button:active, .create-event-link:active {
     transform: translateY(0); /* Reset the transform on click */
@@ -84,4 +103,5 @@ body, html {
       padding: 10px 20px;
     }
   }
+  
   

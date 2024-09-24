@@ -1,62 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useEventDetail } from '../hooks/useEventDetail';
 import '../styles/EventDetail.css';
 
 function EventDetail() {
-  const { id } = useParams(); // Get event ID from URL
-  const [event, setEvent] = useState(null);
-  const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState('');
-  const [newRating, setNewRating] = useState(0);
+  const { id } = useParams();  // Get event ID from URL
+  const {
+    event,
+    reviews,
+    newReview,
+    setNewReview,
+    newRating,
+    setNewRating,
+    submitReview,
+    loading,
+  } = useEventDetail(id);
 
-  useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/events/${id}`);
-        setEvent(response.data);
-      } catch (error) {
-        console.error('Error fetching event details:', error);
-      }
-    };
-
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/reviews/${id}`);
-        setReviews(response.data);
-      } catch (error) {
-        console.error('Error fetching event reviews:', error);
-      }
-    };
-
-    fetchEvent();
-    fetchReviews();
-  }, [id]);
-
-  const submitReview = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('You need to log in to leave a review.');
-      return;
-    }
-
-    try {
-      await axios.post(
-        'http://localhost:5000/api/reviews',
-        { rating: newRating, comment: newReview, eventId: id },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      alert('Review submitted!');
-      // fetchReviews();
-    } catch (error) {
-      console.error('Error submitting review:', error);
-    }
-  };
-
-  if (!event) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
+  if (!event) return <p>Event not found</p>;
 
   return (
-    <div className='event-detail-container'>
+    <div className="event-detail-container">
       <h2>{event.name}</h2>
       <p>{event.description}</p>
       <p>Type: {event.type}</p>

@@ -1,69 +1,47 @@
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import "../styles/mapview.css"
 import L from 'leaflet';
+import { Link } from 'react-router-dom';
+import "../styles/mapview.css";
+import { useMapEvents } from '../hooks/useMapEvents'; // Custom hook
+import { toast } from 'react-toastify';
+import { bookmarkEvent } from '../api/events'; // Bookmark API
 
 const customIcon = new L.Icon({
-  iconUrl: require('./custom_marker.png'),
+  iconUrl: require('../assets/custom_marker.png'),
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
 
 function MapView() {
-  const [events, setEvents] = useState([]);
-  const [userLocation, setUserLocation] = useState(null);
-  const [eventType, setEventType] = useState(''); 
-  const [sortBy, setSortBy] = useState(''); 
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const {
+    userLocation,
+    events,
+    eventType,
+    setEventType,
+    sortBy,
+    setSortBy,
+    error,
+    loading,
+  } = useMapEvents(); // Use custom hook
 
-  useEffect(() => {
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported by your browser.');
-      setLoading(false);
+  const handleBookmark = async (eventId) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // alert('You need to log in to bookmark events.');
+      toast.warn('You need to log in to bookmark events.');
       return;
     }
 
-    // Get user's current location
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation([latitude, longitude]);
-
-        // Fetch nearby events with filters and sorting applied
-        fetchEvents(latitude, longitude, eventType, sortBy);
-      },
-      (err) => {
-        console.error('Geolocation error:', err);
-        setError('Unable to fetch location.');
-        setLoading(false);
-      }
-    );
-  }, [eventType, sortBy]);
-
-  const fetchEvents = async (latitude, longitude, eventType = '', sortBy = '') => {
-    setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/events/search/nearby', {
-        params: {
-          latitude,
-          longitude,
-          radius: 10,
-          type: eventType,
-          sort: sortBy,
-        },
-      });
-      setEvents(response.data);
-      setLoading(false);
+      await bookmarkEvent(eventId, token);
+      // alert('Event bookmarked!');
+      toast.success('Event bookmarked!');
     } catch (error) {
-      console.error('Error fetching events:', error);
-      setError('Error fetching events.');
-      setLoading(false);
+      console.error('Error bookmarking event:', error);
+      toast.error('Failed to bookmark event.');
     }
   };
 
@@ -104,28 +82,9 @@ function MapView() {
                 <p><strong>Type:</strong> {event.type}</p>
                 <p><strong>Date:</strong> {new Date(event.date_time).toLocaleString()}</p>
 
-                {/* Link to Event Detail Page */}
                 <Link to={`/events/${event.id}`}>View Details & Reviews</Link>
 
-                <button
-                  onClick={() => {
-                    const token = localStorage.getItem('token');
-                    if (!token) {
-                      alert('You need to login to bookmark events.');
-                      return;
-                    }
-                    axios
-                      .post(
-                        'http://localhost:5000/api/auth/bookmark',
-                        { eventId: event.id },
-                        { headers: { Authorization: `Bearer ${token}` } }
-                      )
-                      .then(() => alert('Event bookmarked!'))
-                      .catch((error) => console.error('Error bookmarking event:', error));
-                  }}
-                >
-                  Bookmark
-                </button>
+                <button onClick={() => handleBookmark(event.id)}>Bookmark</button>
               </Popup>
             </Marker>
           ))}
