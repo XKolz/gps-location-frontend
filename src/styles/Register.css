@@ -69,4 +69,15 @@
     color: #333; /* You can adjust the color of the eye icon */
     font-size: 1.5rem; /* Adjust icon size as needed */
   }
+
+  .spinners {
+    margin-left: 10px;
+    animation: spin 1s linear infinite;
+    font-size: 16px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
   
